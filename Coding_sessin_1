@@ -1,0 +1,104 @@
+# 1.Գրել ծրագիր, որը վերադարձնում է տրված տողը՝ “cat” այսպես՝ [“Cat”, “cAt”, “caT”], բոլոր հնարավոր տարբերակներով։
+def ret_str(given_str):
+    res_list = []
+    list_given = list(given_str)
+    for i in range(len(list_given)):
+        list_given[i] = list_given[i].upper()
+        res_list.append("".join(list_given))
+        list_given[i] = list_given[i].lower()
+    return res_list
+
+print(ret_str("cat"))
+
+# 2.Գրել ծրագիր, որը կհամեմատի տրված երկու տողերը և կվերադարձնի 0, եթե երկուսն էլ նույն տողն են,
+# հակառակ դեպքում կվերադարձնի երկու տողերի տարբերությունը: Եթե տողերը հավասար չեն, կվերադարձնի -1:
+#Օրինակ՝
+#str1 = “unicorn”, str2 = “unicorn”, Output: 0
+#str1 = “string”, str2 = “strong”, Output: i
+#str1 = “cat”, str2 = “kitten”, Output: -1
+
+def cmp(str_1, str_2):
+    if str_1 == str_2:
+        return 0
+    else:
+        if len(str_1) != len(str_2):
+            return -1
+        else:
+            for i in range(len(str_1)):
+                if str_1[i] != str_2[i]:
+                    return str_1[i]
+
+
+# 3.Իրականացնել strStr ֆունկցիան, որը ստանում է երկու տող և վերադարձնում ինդեքսը, որտեղից սկսված
+# առաջին անգամ հայտնվում է երկրորդ տողը։
+# Օրինակ՝
+# str1 = “HelloWorld”, str2 = “World”, Output: 5
+
+def strStr(str1, str2):
+    substr_index = str1.find(str2)
+    return substr_index
+
+
+# 4.Իրականացնել strMove(string, number, bool) ֆունկցիան, ստանում է տող, թիվ և բուլյան արժեք։
+# Եթե վերջինս True է, տողը տեղաշարժվում է աջ տրված թվի չափով, եթե False՝ ձախ։
+# Օրինակ՝
+# string = “Hello”, number = 2, bool = True, Output: loHel
+
+def strMove(word, num, bool_num):
+    if bool_num is True:
+        if num <= len(word):
+            word = word[-num:] + word[:len(word) - num]
+        else:
+            if num % len(word) != 0:
+                word = word[-num % len(word):] + word[:(len(word) - num % len(word))]
+            else:
+                word = word
+    else:
+        if num <= len(word):
+            word = word[num:] + word[:num]
+        else:
+            if num % len(word) != 0:
+                word = word[num % len(word):] + word[:num % len(word)]
+            else:
+                word = word
+    return word
+
+
+# 5.Տրված է սորտավորված լիստ և մեկ կամայական թիվ։ Գրել ֆունկցիա, որը կվերադարձնի այդ թվի ինդեքսը լիստում,
+# եթե այն առկա է, հակառակ դեպքում այն ինդեքսը, որտեղ որ կլիներ այդ թիվը, եթե պարունակվեր լիստում։
+
+def ret_index(nums, target):
+    if target in nums:
+        return  nums.index(target)
+    else:
+        nums.append(target)
+        nums.sort()
+        return nums.index(target)
+
+
+# 6.Գրել ծրագիր, որը կստանա երկու թիվ՝ m(rows) և n(columns), և կգեներացնի երկչափ զանգված(մատրից)։
+# i-րդ տողի j-րդ սյունակի էլեմենտը պետք է լինի i*j։ Փորձեք խնդիրը լուծել՝ օգտագործելով list comprehension:
+
+def matrix(m, n):
+    l = [[(i+1)*(j+1) for i in range(m)] for j in range(n)]
+    for i in l:
+        print(i,"\n")
+
+
+# 7.Գրել ծրագիր, որը ստուգում է՝ տրված գաղտնաբառը վավեր է, թե ոչ։ Գաղտնաբառը վավեր է, եթե պարունակում է.
+# Առնվազն մեկ մեծատառ
+# Առնվազն մեկ թվանշան
+# Առնվազն մեկ նշան այս ցուցակից՝ [$#@]
+# Ամենաքիչը 6 նիշ
+# Ամենաշատը 16 նիշ
+
+def check_password(password):
+    for i in password:
+        if i in "$#@":
+            if 6 <= len(password) <= 16 and any(i.isupper() for i in password) and any(i.isdigit() for i in password):
+                 return "valid password"
+            return "invalid password"
+
+
+
+
